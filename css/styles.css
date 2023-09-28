@@ -1,8 +1,13 @@
 /* Default */
-body, h1, p, label, input, button {
+* {
     margin: 0;
     padding: 0;
     border: none;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 body {
@@ -16,14 +21,17 @@ body {
 }
 
 .container {
+    margin-top: 5px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    max-width: 400px; 
-    width: 100%; 
+    max-width: 400px;
+    width: 100%;
     text-align: center;
 }
+
+/* Login */
 
 .card-title {
     font-size: 24px;
@@ -33,16 +41,17 @@ body {
 .form-label {
     display: block;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-top: 15px;
 }
 
 .form-control {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .btn-primary {
@@ -52,8 +61,91 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .btn-primary:hover {
     background-color: #0056b3;
+}
+
+/* Homepage */
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; 
+}
+
+.hamburger {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+}
+
+.nav-ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-ul li {
+    margin-right: 20px;
+}
+
+.nav-ul li:last-child {
+    margin-right: 0;
+}
+
+.nav-ul a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.nav-ul a:hover {
+    color: #0056b3;
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.home-description {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    z-index: 100;
+}
+
+.hamburger {
+    order: 1; 
+    margin-right: 20px; 
 }
