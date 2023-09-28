@@ -38,13 +38,29 @@
         </div>
 
         <div>
-            <button type="login" class="btn btn-primary">Login</button>
-            <button type="register" class="btn btn-primary">Register</button>
+            <button id="loginButton" class="btn btn-primary">Login</button>
+            <button id="registerButton" class="btn btn-primary">Register</button>
         </div>
         
     </main>
 
     <!-- Scripts -->
+    <script>
+        // Get references to the buttons
+            const loginButton = document.getElementById('loginButton');
+            const registerButton = document.getElementById('registerButton');
+
+        // Add click event listeners to the buttons
+            loginButton.addEventListener('click', () => {
+        // Redirect to the login page
+            window.location.href = 'login.html';
+        });
+
+            registerButton.addEventListener('click', () => {
+        // Redirect to the register page
+            window.location.href = 'register.html';
+        });
+    </script>
 
 </body>
 </html>
