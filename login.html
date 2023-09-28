@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="The homepage on the site">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="card-title">Login</h1>
+                        </div>
+                        <div class="card-body">
+                            <form id="authForm" method="POST" action="login.html">
+                                <!-- Username Input -->
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Username</label>
+                                        <input for="name" class="form-control" id="name" name="name" required>
+                                    </div>
+                                <!-- Password Input -->
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" minlength="8" required>
+                                </div>
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+
+</body>
+</html>
