@@ -8,9 +8,9 @@ authForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const emailValue = emailInput.value.trim();
-    if (!emailValue.includes('@noroff')('@stud.noroff')) {
+    if (!emailValue.includes('@noroff') && !emailValue.includes('@stud.noroff')) {
         emailError.style.display = 'block';
-        return; // Exit early if email is invalid
+        return; // Stop if invalid email
     } else {
         emailError.style.display = 'none';
 
@@ -18,12 +18,16 @@ authForm.addEventListener('submit', async (event) => {
         const password = document.getElementById('password').value;
 
         try {
-            // Create an object with the user input values
+            // Object for user inputted values
             const userData = {
                 name: username,
                 email: emailValue,
                 password: password,
             };
+
+            // Add console logs to help diagnose the issue
+            console.log('Sending POST request to:', 'https://api.noroff.dev/api/v1/social/auth/register');
+            console.log('Request method:', 'POST');
 
             // Make a POST request to the registration endpoint
             const response = await fetch('https://api.noroff.dev/api/v1/social/auth/register', {

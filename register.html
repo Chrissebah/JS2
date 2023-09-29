@@ -19,7 +19,7 @@
                             <h1 class="card-title">Register</h1>
                         </div>
                         <div class="card-body">
-                            <form id="authForm" method="POST" action="register.html"> 
+                            <form id="authForm" method="POST"> 
                                 
                                 <!-- Email Input -->
                                <div class="mb-3">
@@ -58,7 +58,7 @@
     
         authForm.addEventListener('submit', (event) => {
             const emailValue = emailInput.value.trim();
-            if (!emailValue.includes('@noroff')('@stud.noroff')) {
+            if (!emailValue.includes('@noroff') && !emailValue.includes('@stud.noroff')) {
                 emailError.style.display = 'block';
                 event.preventDefault(); // Prevent form submission
             } else {
