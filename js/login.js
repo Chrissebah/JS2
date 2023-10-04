@@ -31,12 +31,11 @@ loginForm.addEventListener('submit', async (event) => {
         if (response.ok) {
             // Login successful
             const data = await response.json();
-            // Store user data in localStorage or use it as needed
             const username = data.name;
             const userEmail = data.email;
             const userAccessToken = data.accessToken;
 
-            // Example: Store user data in localStorage
+            // Store user data in localStorage
             const userObject = {
                 name: username,
                 email: userEmail,
