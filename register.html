@@ -6,7 +6,7 @@
     <meta name="description" content="The homepage on the site">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet">
-    <script src="js/validation.js"></script>
+    <script src="js/validation.js" defer></script>
     <title>Register</title>
 </head>
 <body>
@@ -31,7 +31,7 @@
                                 <!-- Username Input -->
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Username</label>
-                                    <input for="name" class="form-control" id="name" name="name" required>
+                                    <input id="name" class="form-control" type="text" name="name" required>
                                 </div>
 
                                 <!-- Password Input -->
@@ -50,22 +50,6 @@
     </main>
 
     <!-- Scripts -->
-
-    <script>
-        const emailInput = document.getElementById('email');
-        const emailError = document.getElementById('email-error');
-        const authForm = document.getElementById('authForm');
-    
-        authForm.addEventListener('submit', (event) => {
-            const emailValue = emailInput.value.trim();
-            if (!emailValue.includes('@noroff') && !emailValue.includes('@stud.noroff')) {
-                emailError.style.display = 'block';
-                event.preventDefault(); // Prevent form submission
-            } else {
-                emailError.style.display = 'none';
-            }
-        });
-    </script>
 
 </body>
 </html>
