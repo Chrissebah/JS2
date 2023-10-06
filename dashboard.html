@@ -6,31 +6,32 @@
     <meta name="description" content="The homepage on the site">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet">
+    <script src="js/content.js" defer></script>
     <title>Homepage</title>
 </head>
 <body>
 
     <header>
-
         <nav>
-
             <button class="hamburger" id="hamburger">
-                 <i class="fas fa-bars"></i>
+                <i class="fas fa-bars"></i>
             </button>
-
-                <ul class="nav-ul" id="nav-ul">
-                    <li><a href="">Home</a> </li>
-                    <li><a href="about.html">About</a> </li>
-
-                </ul>
-
+            <ul class="nav-ul" id="nav-ul">
+                <li><a href="">Home</a> </li>
+                <li><a href="about.html">About</a> </li>
+            </ul>
         </nav>
-
     </header>
 
     <main>
+        <div id="content-container" class="carousel-content">
+            <!-- Content items will be displayed here -->
+        </div>
+        <div class="pagination">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
     </main>
-
     
 </body>
 </html>
