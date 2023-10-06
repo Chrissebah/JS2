@@ -1,11 +1,9 @@
-// content.js
-
 let currentPage = 1;
 const itemsPerPage = 5;
 
 function renderContent(data) {
     const contentContainer = document.getElementById('content-container');
-    contentContainer.innerHTML = ''; 
+    contentContainer.innerHTML = '';
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -17,6 +15,16 @@ function renderContent(data) {
         contentItem.innerHTML = `
             <h2>${item.title}</h2>
             <p>${item.body}</p>
+            <p>Tags: ${item.tags.join(', ')}</p>
+            <p>Media: <img src="${item.media}" alt="Media"></p>
+            <p>Created: ${item.created}</p>
+            <p>Updated: ${item.updated}</p>
+            <p>Author: ${item.author.name}</p>
+            <p>Author Email: ${item.author.email}</p>
+            <p>Author Avatar: <img src="${item.author.avatar}" alt="Author Avatar"></p>
+            <p>Author Banner: <img src="${item.author.banner}" alt="Author Banner"></p>
+            <p>Comments: ${item._count.comments}</p>
+            <p>Reactions: ${item._count.reactions}</p>
         `;
         contentContainer.appendChild(contentItem);
     }
@@ -28,9 +36,7 @@ function handlePagination(data) {
 
     prevButton.disabled = currentPage === 1;
 
-
     nextButton.disabled = currentPage >= Math.ceil(data.length / itemsPerPage);
-
 
     prevButton.addEventListener('click', () => {
         if (currentPage > 1) {
@@ -47,21 +53,32 @@ function handlePagination(data) {
     });
 }
 
-// Fetch and display content
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // Fetch content using the access token
-        const accessToken = localStorage.getItem('jwtToken');
-        const response = await fetch('https://api.noroff.dev/api/v1/social', {
-            method: 'GET',
+        // Set your API base URL
+        const API_BASE_URL = 'https://api.noroff.dev/api/v1';
+
+        // Retrieve the JWT token from localStorage
+        const jwtToken = localStorage.getItem('jwtToken');
+
+        // Check if the token exists
+        if (!jwtToken) {
+            console.error('JWT token not found in localStorage.');
+            return;
+        }
+
+        // Configure headers with Authorization using the retrieved token
+        const options = {
             headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwtToken}`,
             },
-        });
+        };
+
+        // Fetch content using the JWT token
+        const response = await fetch(`${API_BASE_URL}/social/posts`, options);
+        const data = await response.json();
 
         if (response.ok) {
-            const data = await response.json();
             renderContent(data);
             handlePagination(data);
         } else {
