@@ -14,10 +14,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     display: flex;
-    justify-content: center;
+    flex-direction: column; 
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    justify-content: flex-start; 
+    min-height: 100vh; 
 }
 
 .container {
@@ -29,7 +29,9 @@ body {
     max-width: 400px;
     width: 100%;
     text-align: center;
+    margin: 2rem auto;
 }
+
 
 /* Login */
 
@@ -74,13 +76,18 @@ header {
     color: #fff;
     padding: 10px;
     text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px; 
+    padding: 0 20px;
 }
 
 .hamburger {
@@ -121,6 +128,7 @@ nav {
 main {
     padding: 20px;
     text-align: center;
+    margin-top: 70px; 
 }
 
 h1 {
@@ -133,19 +141,100 @@ h1 {
     line-height: 1.5;
 }
 
+
+/* Header and Navigation Styles */
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
     text-align: center;
-    z-index: 100;
 }
 
-.hamburger {
-    order: 1; 
-    margin-right: 20px; 
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 1rem;
+}
+
+/* Content Container Styles */
+.container {
+    margin-top: 5px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    margin: 2rem auto; 
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.pagination button {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+.content-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.content-item h2,
+.content-item p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.content-item img {
+    max-width: 100%;
+    height: auto;
+    display: block; 
+    margin: 0 auto; 
+}
+
+.content-item img.author-avatar {
+    max-width: 50px; 
+    max-height: 50px; 
+}
+
+.content-item img.author-banner {
+    width: 100px;
+    height: auto; 
+    max-height: 150px; 
+}
+
+/* Media Styling */
+img {
+    max-width: 100%;
+    height: auto;
 }

@@ -1,3 +1,5 @@
+// login.js
+
 document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('loginForm');
 
@@ -30,18 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 // Login successful
                 const data = await response.json();
-                const username = data.name;
-                const userEmail = data.email;
                 const userAccessToken = data.accessToken;
 
-                // Store user data in localStorage
-                const userObject = {
-                    name: username,
-                    email: userEmail,
-                    accessToken: userAccessToken,
-                };
-
-                localStorage.setItem(username, JSON.stringify(userObject));
+                // Store the JWT token in localStorage with a fixed key
+                localStorage.setItem('jwtToken', userAccessToken);
 
                 // Redirect to the protected content page
                 window.location.href = 'dashboard.html';
