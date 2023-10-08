@@ -227,10 +227,9 @@ nav li {
     max-height: 50px; 
 }
 
-.content-item img.author-banner {
-    width: 100px;
-    height: auto; 
-    max-height: 150px; 
+.content-item-container img.author-banner {
+    max-width: 100px;
+    max-height: 200px;
 }
 
 /* Media Styling */
