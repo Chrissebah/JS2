@@ -25,7 +25,7 @@ authForm.addEventListener('submit', async (event) => {
                 password: password,
             };
 
-            // Add console logs to help diagnose the issue
+            // Console logs to help diagnose issues
             console.log('Sending POST request to:', 'https://api.noroff.dev/api/v1/social/auth/register');
             console.log('Request method:', 'POST');
 

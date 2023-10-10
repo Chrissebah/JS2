@@ -1,5 +1,3 @@
-// content.js
-
 let currentPage = 1;
 const itemsPerPage = 5;
 const contentContainer = document.getElementById('content-container');
@@ -39,10 +37,19 @@ function renderContent(data) {
             <p>Author Banner: <img src="${bannerURL}" alt="Author Profile Banner" class="author-banner"></p>
             <p>Comments: ${item._count.comments}</p>
             <p>Reactions: ${item._count.reactions}</p>
+            <button class="view-post-button" data-post-id="${item.id}">View Post</button> <!-- Add this button -->
         `;
 
         contentItemContainer.appendChild(contentItem);
         contentContainer.appendChild(contentItemContainer);
+
+       
+        const viewPostButton = contentItemContainer.querySelector('.view-post-button');
+        viewPostButton.addEventListener('click', () => {
+            // Redirect to post.html with the post ID as a query parameter
+            const postId = viewPostButton.getAttribute('data-post-id');
+            window.location.href = `post.html?postId=${postId}`;
+        });
     }
 }
 
@@ -67,14 +74,14 @@ function handlePagination(data) {
             currentPage++;
             renderContent(data);
             updateButtonState(data);
-            
+
             // Scroll to the top of the page
             window.scrollTo(0, 0);
         }
     });
 }
 
-// Add this function to update button state
+
 function updateButtonState(data) {
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
@@ -104,13 +111,93 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Fetch content using the JWT token
         const response = await fetch('https://api.noroff.dev/api/v1/social/posts', options);
-        const data = await response.json();
+        let data = await response.json();
 
         if (response.ok) {
+            // Extract unique tags from the data
+            const allTags = data.reduce((tags, item) => {
+                item.tags.forEach((tag) => {
+                    if (!tags.includes(tag)) {
+                        tags.push(tag);
+                    }
+                });
+                return tags;
+            }, []);
+
+            // Generate tag buttons dynamically
+            const tagContainer = document.querySelector('.tags');
+            allTags.forEach((tag) => {
+                const tagButton = document.createElement('button');
+                tagButton.classList.add('tag-button');
+                tagButton.textContent = tag;
+                tagButton.addEventListener('click', () => {
+                    toggleTag(tag);
+                });
+                tagContainer.appendChild(tagButton);
+            });
+
             renderContent(data);
             handlePagination(data);
         } else {
             console.error('Failed to fetch content:', response.status);
+        }
+
+        // Add event listener for pressing Enter in the search input
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                performSearch(data);
+            }
+        });
+
+        // Add event listener for the search button
+        const searchButton = document.getElementById('searchButton');
+        searchButton.addEventListener('click', () => {
+            performSearch(data);
+        });
+
+        // Function to perform search
+        function performSearch(data) {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            // Filter data based on the search term
+            const filteredData = data.filter((item) => {
+                const title = (item.title || '').toLowerCase(); 
+                const body = (item.body || '').toLowerCase();  
+                return title.includes(searchTerm) || body.includes(searchTerm);
+            });
+        
+            currentPage = 1; // Reset to the first page when filtering
+            renderContent(filteredData);
+            handlePagination(filteredData);
+        }
+
+        // Function to toggle selected tags
+        const selectedTags = new Set();
+
+        function toggleTag(tag) {
+            if (selectedTags.has(tag)) {
+                selectedTags.delete(tag);
+            } else {
+                selectedTags.add(tag);
+            }
+
+            const tagButtons = document.querySelectorAll('.tag-button');
+            tagButtons.forEach((tagButton) => {
+                if (selectedTags.has(tagButton.textContent)) {
+                    tagButton.classList.add('selected-tag');
+                } else {
+                    tagButton.classList.remove('selected-tag');
+                }
+            });
+
+            const filteredData = data.filter((item) => {
+                return selectedTags.size === 0 || item.tags.some((tag) => selectedTags.has(tag));
+            });
+
+            currentPage = 1;
+            renderContent(filteredData);
+            handlePagination(filteredData);
         }
     } catch (error) {
         console.error('An error occurred:', error);
