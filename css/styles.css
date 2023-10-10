@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     border: none;
+    font-family: 'Roboto', sans-serif;
 }
 
 html, body {
@@ -14,10 +15,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start; 
-    min-height: 100vh; 
+    justify-content: flex-start;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
 }
@@ -37,7 +38,6 @@ main {
     text-align: center;
     margin: 2rem auto;
 }
-
 
 /* Login */
 
@@ -87,6 +87,9 @@ header {
     left: 0;
     width: 100%;
     z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav {
@@ -134,7 +137,7 @@ nav {
 main {
     padding: 20px;
     text-align: center;
-    margin-top: 70px; 
+    margin-top: 70px;
 }
 
 h1 {
@@ -157,7 +160,7 @@ h1 {
     max-width: 600px;
     width: 100%;
     text-align: center;
-    margin: 2rem auto; 
+    margin: 2rem auto;
 }
 
 /* Pagination Styles */
@@ -183,7 +186,6 @@ h1 {
     cursor: not-allowed;
 }
 
-
 .content-item {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -201,17 +203,16 @@ h1 {
     text-overflow: ellipsis;
 }
 
-
 .content-item img {
     max-width: 100%;
     height: auto;
-    display: block; 
-    margin: 0 auto; 
+    display: block;
+    margin: 0 auto;
 }
 
 .content-item img.author-avatar {
-    max-width: 50px; 
-    max-height: 50px; 
+    max-width: 50px;
+    max-height: 50px;
 }
 
 .content-item-container img.author-banner {
@@ -225,14 +226,13 @@ img {
     height: auto;
 }
 
-
-footer{ 
+footer{
     background-color: #007bff;
     width: 100%;
     flex-shrink: 0;
+    text-align: center;
+    align-content: center;
 }
-
-
 
 .tags {
     margin-top: 10px;
@@ -254,24 +254,21 @@ footer{
     background-color: #007bff;
     color: #fff;
     border: 2px solid #007bff;
-
 }
-
 
 /* Search Button */
 #searchButton {
-    background-color: #007BFF; 
-    color: #fff; 
+    background-color: #007BFF;
+    color: #fff;
     padding: 10px 20px;
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #searchButton:hover {
-    background-color: #0056b3; 
+    background-color: #0056b3;
 }
-
 
 /* Post Page */
 #postMedia {
@@ -283,14 +280,210 @@ footer{
 .view-post-button {
     background-color: #007BFF;
     color: #fff;
-    padding: 10px 20px; 
+    padding: 10px 20px;
     border: none;
-    border-radius: 5px; 
-    cursor: pointer; 
+    border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 5px;
 }
 
 .view-post-button:hover {
     background-color: #0056b3;
+}
+
+/* Create Post button */
+.create-post-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.create-post-button:hover {
+    background-color: #0056b3;
+}
+
+/* Modal Container */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    max-width: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+/* Close Button (X) */
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #888;
+}
+
+/* Close Button Hover Effect */
+.modal-content .close:hover {
+    color: #333;
+}
+
+/* Modal Header */
+.modal-content h2 {
+    margin-top: 0;
+}
+
+/* Form Styling */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-content label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.modal-content input[type="text"],
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Button Styling */
+.modal-content button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.modal-content .cancel {
+    background-color: #ccc;
+    color: #333;
+}
+
+.modal-content .create {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.modal-content .create:hover {
+    background-color: #0056b3;
+}
+
+/* Delete Post Button Styling */
+
+#deletePostButton {
+    margin-top: 20px;
+    background-color: #000000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+#deletePostButton:hover {
+    transition: background-color ease .5s;
+    background-color: #ff0000;
+}
+
+/* Style for the Edit button */
+.edit-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.edit-button:hover {
+    transition: background-color ease .5s;
+    background-color: #0056b3;
+}
+
+/* Modal Container */
+.post-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.post-modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    max-width: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+/* Close Button (X) */
+.post-modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #888;
+}
+
+/* Close Button Hover Effect */
+.post-modal-content .close:hover {
+    color: #333;
+}
+
+/* Modal Header */
+.post-modal-content h2 {
+    margin-top: 0;
+}
+
+/* Form Styling */
+.post-modal-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

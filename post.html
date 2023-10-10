@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet">
-    <script src="js/post.js" defer></script>
+    <script src="/js/post.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,500;1,700&display=swap" rel="stylesheet">
     <title>Post Details</title>
 </head>
 
@@ -37,7 +38,28 @@
             <p>Reactions: <span id="postReactions"></span></p>
             <p>Author Name: <span id="postAuthorName"></span></p>
             <p>Author Email: <span id="postAuthorEmail"></span></p>
-        </div>
+
+            <button id="editPostButton" class="edit-button">Edit</button>
+            <button id="deletePostButton">Delete</button>
+            
+            <div id="editPostModal" class="post-modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Edit Post</h2>
+                    <form id="editPostForm">
+                        <label for="editPostTitle">Title:</label>
+                        <input type="text" id="editPostTitle" name="editPostTitle" required>
+                        <label for="editPostBody">Body:</label>
+                        <textarea id="editPostBody" name="editPostBody" required></textarea>
+                        <label for="editPostTags">Tags (comma-separated):</label>
+                        <input type="text" id="editPostTags" name="editPostTags">
+                        <label for="editPostMedia">Media URL:</label>
+                        <input type="text" id="editPostMedia" name="editPostMedia">
+                        
+                        <button type="button" id="editPostChangeButton">Change</button>
+                    </form>
+                </div>
+            </div>
 
     </main>
 

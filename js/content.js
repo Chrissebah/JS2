@@ -1,6 +1,7 @@
 let currentPage = 1;
 const itemsPerPage = 5;
 const contentContainer = document.getElementById('content-container');
+let jwtToken; 
 
 function renderContent(data) {
     // Clear the content container before rendering new items
@@ -43,7 +44,6 @@ function renderContent(data) {
         contentItemContainer.appendChild(contentItem);
         contentContainer.appendChild(contentItemContainer);
 
-       
         const viewPostButton = contentItemContainer.querySelector('.view-post-button');
         viewPostButton.addEventListener('click', () => {
             // Redirect to post.html with the post ID as a query parameter
@@ -81,7 +81,6 @@ function handlePagination(data) {
     });
 }
 
-
 function updateButtonState(data) {
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
@@ -94,7 +93,7 @@ function updateButtonState(data) {
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Retrieve the JWT token from localStorage
-        const jwtToken = localStorage.getItem('jwtToken');
+        jwtToken = localStorage.getItem('jwtToken');
 
         // Check if the token exists
         if (!jwtToken) {
@@ -159,14 +158,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Function to perform search
         function performSearch(data) {
             const searchTerm = searchInput.value.trim().toLowerCase();
-            
+
             // Filter data based on the search term
             const filteredData = data.filter((item) => {
-                const title = (item.title || '').toLowerCase(); 
-                const body = (item.body || '').toLowerCase();  
+                const title = (item.title || '').toLowerCase();
+                const body = (item.body || '').toLowerCase();
                 return title.includes(searchTerm) || body.includes(searchTerm);
             });
-        
+
             currentPage = 1; // Reset to the first page when filtering
             renderContent(filteredData);
             handlePagination(filteredData);
@@ -202,4 +201,124 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error('An error occurred:', error);
     }
+
+    // Attach event listeners to "Delete" buttons
+function attachDeletePostListeners() {
+    const deletePostButtons = document.querySelectorAll('.delete-post-button');
+    deletePostButtons.forEach((deleteButton) => {
+        deleteButton.addEventListener('click', () => {
+            const postId = deleteButton.getAttribute('data-post-id');
+            // Call the function to handle the deletion of the post
+            handleDeletePost(postId);
+        });
+    });
+}
+
+// Function to handle the deletion of a post
+async function handleDeletePost(postId) {
+    try {
+        const response = await fetch(`https://api.noroff.dev/api/v1/social/posts/${postId}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${jwtToken}`,
+            },
+        });
+
+        if (response.ok) {
+            // Post deleted successfully, you may want to remove it from the UI
+            console.log('Post deleted successfully');
+            // After deleting a post, reload the page to reflect the changes
+            window.location.reload();
+        } else {
+            console.error('Failed to delete post:', response.status);
+        }
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
+}
+
+   // Function to open the create post modal
+function openCreatePostModal() {
+    const modal = document.getElementById('createPostModal');
+
+    // Ensure the modal element exists
+    if (!modal) {
+        console.error('Create Post Modal not found');
+        return;
+    }
+
+    // Show the modal
+    modal.style.display = 'block';
+
+    // Get the close button and add a click event listener
+    const closeBtn = modal.querySelector('.close');
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Get the cancel button and add a click event listener
+    const cancelBtn = modal.querySelector('.cancel');
+    cancelBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Get the create button and add a click event listener
+    const createBtn = modal.querySelector('.create');
+    createBtn.addEventListener('click', () => {
+        // Get the new post data from the modal inputs
+        const newPostData = {
+            title: document.getElementById('postTitle').value,
+            body: document.getElementById('postBody').value,
+            tags: document.getElementById('postTags').value.split(','),
+            media: document.getElementById('postMedia').value,
+        };
+
+        // Send a POST request to create a new post
+        fetch('https://api.noroff.dev/api/v1/social/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwtToken}`,
+            },
+            body: JSON.stringify(newPostData),
+        })
+        .then((response) => {
+            if (response.ok) {
+                
+                modal.style.display = 'none';
+                clearCreatePostForm();
+                console.log('Post created successfully');
+
+                window.location.reload();
+            } else {
+                console.error('Failed to create post:', response.status);
+            }
+        })
+        .catch((error) => {
+            console.error('An error occurred:', error);
+        });
+    });
+}
+
+// Function to clear the create post form
+function clearCreatePostForm() {
+    document.getElementById('createPostForm').reset();
+}
+
+// Call the openCreatePostModal function when the "Create Post" button is clicked
+document.getElementById('createPostButton').addEventListener('click', () => {
+    openCreatePostModal();
+});
+
+// Clear the create post form
+function clearCreatePostForm() {
+    document.getElementById('postTitle').value = '';
+    document.getElementById('postBody').value = '';
+    document.getElementById('postTags').value = '';
+    document.getElementById('postMedia').value = '';
+}
+
+    // Call the functions to handle create, update, and delete actions
+    createPost();
+   
 });

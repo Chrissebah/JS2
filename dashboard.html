@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet">
     <script src="js/content.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,500;1,700&display=swap" rel="stylesheet">
     <title>Homepage</title>
 </head>
 <body>
@@ -23,7 +24,7 @@
     </header>
 
     <main>
-        
+
         <div class="container">
             <input type="text" id="searchInput" placeholder="Search...">
             <button id="searchButton">Search</button>
@@ -38,7 +39,26 @@
                 <button id="nextButton">Next</button>
             </div>
 
-        </div>
+            <button id="createPostButton" class="create-post-button">Create Post</button>
+            
+            <div id="createPostModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Create Post</h2>
+                    <form id="createPostForm">
+                        <label for="postTitle">Title:</label>
+                        <input type="text" id="postTitle" name="postTitle" required>
+                        <label for="postBody">Body:</label>
+                        <textarea id="postBody" name="postBody" required></textarea>
+                        <label for="postTags">Tags (comma-separated):</label>
+                        <input type="text" id="postTags" name="postTags">
+                        <label for="postMedia">Media URL:</label>
+                        <input type="text" id="postMedia" name="postMedia">
+                        <button type="button" class="cancel">Cancel</button>
+                        <button type="button" class="create">Create</button>
+                    </form>
+                </div>
+            </div>
 
     </main>
 
