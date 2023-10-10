@@ -14,17 +14,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         const isCurrentUserAuthor = checkIfCurrentUserIsAuthor(post);
 
         // Update the "Edit" button to be enabled or disabled based on user authorship
-        editButton = document.getElementById('editPostButton'); // Remove the "let" keyword here
+        editButton = document.getElementById('editPostButton');
         editButton.disabled = !isCurrentUserAuthor;
 
-        // Update post details
+        
         updatePostDetails(post);
 
         // Add event listener to the Delete button
         const deletePostButton = document.getElementById('deletePostButton');
         deletePostButton.addEventListener('click', async () => {
             try {
-                // Confirm the user's intent to delete the post
+                
                 const confirmDelete = confirm('Are you sure you want to delete this post?');
 
                 if (confirmDelete) {
@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         editButton.addEventListener('click', () => {
+            console.log('Edit button clicked');
             openEditPostModal(post);
         });
     } catch (error) {
@@ -65,7 +66,7 @@ async function fetchPostById(postId) {
             return null;
         }
 
-        // Fetch the post details using the post ID and include the JWT token in the headers
+       
         const response = await fetch(`https://api.noroff.dev/api/v1/social/posts/${postId}`, {
             headers: {
                 Authorization: `Bearer ${jwtToken}`,
@@ -148,12 +149,11 @@ function checkIfCurrentUserIsAuthor(post) {
             return false; // User is not authenticated
         }
 
-        // Decode the JWT token to get the user's ID (assuming it contains user information)
         const tokenParts = jwtToken.split('.');
         const tokenPayload = JSON.parse(atob(tokenParts[1]));
         const currentUserId = tokenPayload.id;
 
-        // Check if the post has an author ID and if it matches the current user's ID
+        
         return post._author && post._author.id === currentUserId;
     } catch (error) {
         console.error('An error occurred while checking if the current user is the author:', error);
@@ -162,13 +162,12 @@ function checkIfCurrentUserIsAuthor(post) {
 }
 
 function openEditPostModal(post) {
-
     console.log('Opening edit modal...');
 
-    // Get the editing modal
+    // Get the editing moda
     const modal = document.getElementById('editPostModal');
 
-    // Ensure the modal element exists
+    
     if (!modal) {
         console.error('Edit Post Modal not found');
         return;
@@ -176,27 +175,26 @@ function openEditPostModal(post) {
 
     console.log('Modal:', modal);
 
-    // Set the modal to display as a block
     modal.style.display = 'block';
 
-    // Populate the editing form with the post data
+   
     document.getElementById('editPostTitle').value = post.title || '';
     document.getElementById('editPostBody').value = post.body || '';
     document.getElementById('editPostTags').value = post.tags ? post.tags.join(', ') : '';
     document.getElementById('editPostMedia').value = post.media || '';
 
-    // Get the close button and add a click event listener
+    
     const closeBtn = modal.querySelector('.close');
     console.log('Close Button:', closeBtn);
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 
-    // Get the "Change" button and add a click event listener to send the POST request
+    
     const changeBtn = document.getElementById('editPostChangeButton'); 
     console.log('Change Button:', changeBtn);
     changeBtn.addEventListener('click', () => {
-        // Get the edited post data from the modal inputs
+        
         const editedPostData = {
             title: document.getElementById('editPostTitle').value,
             body: document.getElementById('editPostBody').value,

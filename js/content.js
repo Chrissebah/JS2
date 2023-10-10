@@ -4,7 +4,7 @@ const contentContainer = document.getElementById('content-container');
 let jwtToken; 
 
 function renderContent(data) {
-    // Clear the content container before rendering new items
+    
     contentContainer.innerHTML = '';
 
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -75,7 +75,7 @@ function handlePagination(data) {
             renderContent(data);
             updateButtonState(data);
 
-            // Scroll to the top of the page
+        
             window.scrollTo(0, 0);
         }
     });
@@ -95,13 +95,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Retrieve the JWT token from localStorage
         jwtToken = localStorage.getItem('jwtToken');
 
-        // Check if the token exists
+        
         if (!jwtToken) {
             console.error('JWT token not found in localStorage.');
             return;
         }
 
-        // Configure headers with Authorization using the retrieved token
+        
         const options = {
             headers: {
                 Authorization: `Bearer ${jwtToken}`,
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         let data = await response.json();
 
         if (response.ok) {
-            // Extract unique tags from the data
+            
             const allTags = data.reduce((tags, item) => {
                 item.tags.forEach((tag) => {
                     if (!tags.includes(tag)) {
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Failed to fetch content:', response.status);
         }
 
-        // Add event listener for pressing Enter in the search input
+        
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
@@ -149,13 +149,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
-        // Add event listener for the search button
+       
         const searchButton = document.getElementById('searchButton');
         searchButton.addEventListener('click', () => {
             performSearch(data);
         });
 
-        // Function to perform search
+        
         function performSearch(data) {
             const searchTerm = searchInput.value.trim().toLowerCase();
 
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return title.includes(searchTerm) || body.includes(searchTerm);
             });
 
-            currentPage = 1; // Reset to the first page when filtering
+            currentPage = 1;
             renderContent(filteredData);
             handlePagination(filteredData);
         }
@@ -202,41 +202,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('An error occurred:', error);
     }
 
-    // Attach event listeners to "Delete" buttons
-function attachDeletePostListeners() {
-    const deletePostButtons = document.querySelectorAll('.delete-post-button');
-    deletePostButtons.forEach((deleteButton) => {
-        deleteButton.addEventListener('click', () => {
-            const postId = deleteButton.getAttribute('data-post-id');
-            // Call the function to handle the deletion of the post
-            handleDeletePost(postId);
-        });
-    });
-}
-
-// Function to handle the deletion of a post
-async function handleDeletePost(postId) {
-    try {
-        const response = await fetch(`https://api.noroff.dev/api/v1/social/posts/${postId}`, {
-            method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${jwtToken}`,
-            },
-        });
-
-        if (response.ok) {
-            // Post deleted successfully, you may want to remove it from the UI
-            console.log('Post deleted successfully');
-            // After deleting a post, reload the page to reflect the changes
-            window.location.reload();
-        } else {
-            console.error('Failed to delete post:', response.status);
-        }
-    } catch (error) {
-        console.error('An error occurred:', error);
-    }
-}
-
    // Function to open the create post modal
 function openCreatePostModal() {
     const modal = document.getElementById('createPostModal');
@@ -247,16 +212,16 @@ function openCreatePostModal() {
         return;
     }
 
-    // Show the modal
+  
     modal.style.display = 'block';
 
-    // Get the close button and add a click event listener
+
     const closeBtn = modal.querySelector('.close');
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 
-    // Get the cancel button and add a click event listener
+   
     const cancelBtn = modal.querySelector('.cancel');
     cancelBtn.addEventListener('click', () => {
         modal.style.display = 'none';
@@ -265,7 +230,7 @@ function openCreatePostModal() {
     // Get the create button and add a click event listener
     const createBtn = modal.querySelector('.create');
     createBtn.addEventListener('click', () => {
-        // Get the new post data from the modal inputs
+      
         const newPostData = {
             title: document.getElementById('postTitle').value,
             body: document.getElementById('postBody').value,
@@ -305,12 +270,12 @@ function clearCreatePostForm() {
     document.getElementById('createPostForm').reset();
 }
 
-// Call the openCreatePostModal function when the "Create Post" button is clicked
+
 document.getElementById('createPostButton').addEventListener('click', () => {
     openCreatePostModal();
 });
 
-// Clear the create post form
+
 function clearCreatePostForm() {
     document.getElementById('postTitle').value = '';
     document.getElementById('postBody').value = '';
@@ -318,7 +283,7 @@ function clearCreatePostForm() {
     document.getElementById('postMedia').value = '';
 }
 
-    // Call the functions to handle create, update, and delete actions
-    createPost();
+    
+   
    
 });

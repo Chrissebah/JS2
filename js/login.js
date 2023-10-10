@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 password: password,
             };
 
-            // Console log to help diagnose the issue
+            // Console log to help diagnose issues
             console.log('Sending POST request to:', 'https://api.noroff.dev/api/v1/social/auth/login');
             console.log('Request method:', 'POST');
 
