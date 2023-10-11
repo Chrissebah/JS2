@@ -204,7 +204,7 @@ function openEditPostModal(post) {
 
         // Send a POST request to update the post content
         fetch(`https://api.noroff.dev/api/v1/social/posts/${post.id}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${jwtToken}`,
