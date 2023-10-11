@@ -447,6 +447,19 @@ footer{
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+/* Modal Container */
+.post-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
 /* Modal Content */
 .post-modal-content {
     background-color: #fff;
@@ -471,19 +484,44 @@ footer{
     color: #888;
 }
 
-/* Close Button Hover Effect */
 .post-modal-content .close:hover {
     color: #333;
 }
 
-/* Modal Header */
 .post-modal-content h2 {
     margin-top: 0;
 }
 
-/* Form Styling */
 .post-modal-content form {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.post-modal-content label {
+    margin-top: 10px;
+}
+
+.post-modal-content input,
+.post-modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.post-modal-content button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.post-modal-content button:hover {
+    background-color: #0056b3;
 }

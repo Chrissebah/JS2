@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Update the "Edit" button to be enabled or disabled based on user authorship
         editButton = document.getElementById('editPostButton');
-        editButton.disabled = !isCurrentUserAuthor;
+        
 
         
         updatePostDetails(post);
@@ -212,6 +212,7 @@ function openEditPostModal(post) {
             body: JSON.stringify(editedPostData),
         })
             .then((response) => {
+                console.log('Response:', response);
                 if (response.ok) {
                     modal.style.display = 'none';
                     console.log('Post updated successfully');
