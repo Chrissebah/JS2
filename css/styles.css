@@ -39,6 +39,20 @@ main {
     margin: 2rem auto;
 }
 
+/* index.html */
+#hero-section {
+    position: relative;
+   
+  }
+  
+  .home-description{
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
 /* Login */
 
 .card-title {

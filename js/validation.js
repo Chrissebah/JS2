@@ -46,8 +46,8 @@ authForm.addEventListener('submit', async (event) => {
                 // Save the JWT token to localStorage
                 localStorage.setItem('jwtToken', jwtToken);
 
-                // Redirect to the protected content page
-                window.location.href = 'dashboard.html';
+                // Redirect to the login page
+                window.location.href = 'login.html';
             } else {
                 // Registration failed, handle the error
                 console.error('Registration failed');
